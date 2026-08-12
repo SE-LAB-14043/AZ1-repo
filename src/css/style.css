@@ -24,13 +24,20 @@ html {
 
 body {
     font-family: "Vazirmatn", sans-serif;
-    background: var(--background);
+    background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 30%),
+        linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
     color: var(--text);
     line-height: 1.8;
+    padding: 24px 0 0;
 }
 
 button, a {
     font-family: inherit;
+}
+
+main.home-page {
+    display: block;
 }
 
 a {
@@ -62,9 +69,9 @@ a {
     margin: auto;
     min-height: 720px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.1fr 0.9fr;
     align-items: center;
-    gap: 80px;
+    gap: 60px;
     position: relative;
     z-index: 2;
 }
@@ -335,8 +342,13 @@ a {
 
 /* ========================= STATISTICS ========================= */
 .statistics {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 28px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
 }
 
 .stats-container {
@@ -377,6 +389,19 @@ a {
     padding: 110px 0;
 }
 
+.calculators {
+    padding-top: 100px;
+}
+
+.how-it-works,
+.faq {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 30px;
+    padding: 70px 32px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.04);
+}
+
 .section-heading {
     max-width: 650px;
     margin: 0 auto 55px;
@@ -401,18 +426,24 @@ a {
 /* ========================= CALCULATOR CARDS ========================= */
 .calculator-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    align-items: stretch;
 }
 
 .calculator-card {
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     min-height: 360px;
-    padding: 40px;
-    border-radius: var(--radius-lg);
+    height: 100%;
+    padding: 32px 30px 28px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     color: white;
-    box-shadow: var(--shadow);
+    box-shadow: 0 26px 60px rgba(15, 23, 42, 0.12);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -439,6 +470,14 @@ a {
     background: rgba(255, 255, 255, 0.14);
     font-size: 23px;
     margin-bottom: 25px;
+    flex-shrink: 0;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: flex-start;
 }
 
 .card-label {
@@ -458,6 +497,7 @@ a {
     color: rgba(255, 255, 255, 0.78);
     font-size: 13px;
     line-height: 2;
+    margin-bottom: auto;
 }
 
 .card-button {
@@ -470,9 +510,11 @@ a {
     font-family: inherit;
     font-weight: 600;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
+    width: fit-content;
     gap: 10px;
     align-items: center;
+    justify-content: center;
 }
 
 .card-decoration {
@@ -491,15 +533,25 @@ a {
 }
 
 .steps {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 18px;
+    padding-top: 10px;
 }
 
 .step {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 22px;
+    padding: 28px 18px;
+    min-height: 230px;
+    height: 100%;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.03);
 }
 
 .step-number {
@@ -527,9 +579,7 @@ a {
 }
 
 .step-line {
-    width: 80px;
-    height: 1px;
-    background: repeating-linear-gradient(to right, var(--border) 0, var(--border) 5px, transparent 5px, transparent 10px);
+    display: none;
 }
 
 /* ========================= FAQ ========================= */
@@ -544,11 +594,12 @@ a {
 }
 
 .faq-item {
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 18px;
     overflow: hidden;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.02);
 }
 
 .faq-item[open] {
@@ -562,6 +613,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
     font-size: 14px;
     font-weight: 600;
 }
@@ -603,10 +655,11 @@ a {
     text-align: center;
     background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15), transparent 35%), linear-gradient(135deg, #0f172a, #1e3a8a);
     color: white;
+    box-shadow: 0 28px 60px rgba(15, 23, 42, 0.14);
 }
 
 .cta-content {
-    max-width: 600px;
+    max-width: 760px;
     margin: auto;
 }
 
@@ -641,6 +694,32 @@ a {
 .cta-button {
     background: white;
     color: var(--primary);
+}
+
+.cta-actions {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 14px;
+    width: 100%;
+}
+
+.cta-actions .cta-button {
+    flex: 1 1 0;
+    min-width: 220px;
+    max-width: 100%;
+    min-height: 60px;
+    padding-inline: 24px;
+    white-space: normal;
+    text-align: center;
+}
+
+.secondary-cta {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: none;
 }
 
 /* ========================= RESPONSIVE ========================= */
