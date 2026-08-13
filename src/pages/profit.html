@@ -50,6 +50,10 @@
 
     <link
         rel="stylesheet"
+        href="../styles/profit.css"
+    >
+    <link
+        rel="stylesheet"
         href="../components/navbar/navbar.css"
     >
 
@@ -72,18 +76,67 @@
                 محاسبه سود صندوق درآمد ثابت
             </h1>
 
-            <p>
-                صفحه محاسبه سود در این قسمت ساخته خواهد شد.
-            </p>
+            <section class="calculator-card">
+                <div class="calc-row">
+                    <label>مقدار سرمایه‌گذاری (تومان)</label>
+                    <input id="principal" placeholder="مثال: 2,000,000">
+                </div>
+
+                <div class="calc-row">
+                    <label>نرخ سود سالانه روزشمار (%)</label>
+                    <input id="annual-rate" placeholder="مثال: 18">
+                </div>
+
+                <div class="calc-row">
+                    <label>مدت نگهداری (روز)</label>
+                    <input id="days-held" placeholder="مثال: 45">
+                </div>
+
+                <div class="calc-actions">
+                    <button id="calculate-profit" class="btn-primary">محاسبه</button>
+                </div>
+            </section>
+
+            <aside id="math-explanation" class="math-expl">
+
+                <p>سود مرکب یکی از اصول مهم در سرمایه‌گذاری‌های بلندمدت است که تأثیر زیادی بر میزان سود نهایی دارد. به عبارت ساده، سود مرکب به این معناست که سود حاصل از سرمایه‌گذاری به اصل سرمایه افزوده می‌شود و در دوره‌های بعدی، سودها بر اساس مبلغ جدید (که شامل سودهای قبلی است) محاسبه می‌شود. این فرآیند باعث می‌شود که سرمایه شما به‌طور تصاعدی رشد کند.</p>
+
+                <p>در صندوق‌های درآمد ثابت، اگر سود نقدی به صورت دوره‌ای دوباره سرمایه‌گذاری شود، می‌تواند باعث افزایش بیشتر سود و رشد سرمایه در طول زمان گردد. این فرآیند منجر به سود مرکب خواهد شد و به سرمایه‌گذار کمک می‌کند تا بازدهی بیشتری از سرمایه‌گذاری خود کسب کند. در این حالت سود هر روز شما دوباره سرمایه گذاری میشود و سود شما به صورت تصاعدی بالا می‌رود.</p>
+            </aside>
+
+            <div id="profit-result" class="profit-result" aria-hidden="true">
+                <div class="result-card">
+                    <button id="close-profit" class="close-btn">×</button>
+                    <div class="result-top">
+                        <div class="result-left">
+                            <div><strong>اصل سرمایه</strong><span id="out-principal"></span></div>
+                            <div><strong>مدت نگهداری</strong><span id="out-days"></span></div>
+                            <div><strong>نرخ سالانه (روزشمار)</strong><span id="out-rate"></span></div>
+                        </div>
+                    </div>
+                    <div class="result-body">
+                        <h4>مبلغ در پایان دوره</h4>
+                        <div class="big" id="out-amount"></div>
+
+                        <h4>سود دوره‌ای</h4>
+                        <div class="big" id="out-profit"></div>
+
+                        <h4>نرخ سالانهٔ موثر (مشابه ته سال)</h4>
+                        <div class="big" id="out-effective-rate"></div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
     </main>
 
-
     <script
         src="../components/navbar/navbar.js"
     ></script>
+    <script src="../js/profit.js" defer></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.getElementById('math-explanation'),{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
 
 </body>
 
