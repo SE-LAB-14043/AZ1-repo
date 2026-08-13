@@ -1,0 +1,16 @@
+@media (max-width: 900px) {
+
+    :root {
+        --navbar-height: 70px;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    :root {
+        --page-padding: 14px;
+    }
+
+}
