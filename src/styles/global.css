@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Vazirmatn", sans-serif;
+
+    background: var(--color-background);
+    color: var(--color-text);
+
+    line-height: 1.8;
+
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    width: min(
+        var(--container-width),
+        calc(100% - 2 * var(--page-padding))
+    );
+
+    margin: 0 auto;
+}
+
+/*
+ * Because the navbar is fixed,
+ * page content needs top spacing.
+ */
+
+.page-content {
+    padding-top: var(--navbar-height);
+}
