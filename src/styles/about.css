@@ -1,0 +1,14 @@
+/* About page styles */
+body[data-page="about"] .about-card{
+  background:#fff;border-radius:14px;padding:22px;max-width:760px;margin:18px auto;font-family:Vazirmatn, sans-serif;color:#333;border:1px solid #e6efe6;
+}
+.about-card h2{color:#7a7a41;margin-bottom:8px}
+.dev-box{display:flex;gap:12px;margin-bottom:12px}
+.dev-item{flex:1;background:#fbfffb;border:1px solid #e6efe6;padding:12px;border-radius:10px;text-align:center;color:#2a807f;font-weight:600}
+.meta{margin:10px 0;color:#6b6b6b}
+.about-card h3{color:#7a7a41;margin-top:14px}
+.about-card p{line-height:1.8;color:#444}
+
+@media (max-width:600px){
+  .dev-box{flex-direction:column}
+}
