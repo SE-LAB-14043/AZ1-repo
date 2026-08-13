@@ -1,0 +1,41 @@
+/* Styles for loan calculator (rtl) */
+body[data-page="loan"] .calculator-card{
+  background:#fff; border-radius:12px; padding:24px; max-width:640px; margin:20px auto; box-shadow:0 2px 0 rgba(0,0,0,0.02);
+}
+.calculator-card .calc-row{margin-bottom:16px}
+.calculator-card label{display:block;color:#8b8b5f;margin-bottom:8px}
+.calculator-card input, .calculator-card select{width:100%;padding:14px;border-radius:14px;border:2px solid #e6efe6;background:#fafdf9;font-size:16px;font-family: Vazirmatn, sans-serif}
+
+/* make select match inputs visually: larger centered text and custom caret on left for RTL */
+.calculator-card select{
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  text-align:center;
+  font-size:20px;
+  font-weight:500;
+  color:#2a807f;
+  padding-left:44px; /* space for left caret */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24'><path fill='%232a807f' d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat:no-repeat;
+  background-position: 12px center;
+}
+.calculator-card.two-cols{display:flex;gap:12px}
+.calculator-card .two-cols > div{flex:1}
+.calc-actions{text-align:center;margin-top:10px}
+.btn-primary{background:#5b9b98;color:#fff;padding:12px 36px;border-radius:24px;border:none;font-size:18px}
+.math-expl{max-width:640px;margin:18px auto;padding:12px;color:#555}
+.math-expl .code{background:#f3f7f3;padding:8px;border-radius:8px;font-family:monospace}
+
+/* result modal */
+.result-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);padding:20px}
+.result-card{background:#fff;border-radius:12px;max-width:520px;width:100%;padding:20px 20px 20px 64px;position:relative}
+.close-btn{position:absolute;left:12px;top:12px;background:#c69a00;color:#fff;border-radius:50%;width:36px;height:36px;border:none;z-index:5}
+.result-top{border-bottom:1px solid #eee;padding-bottom:12px;margin-bottom:12px}
+.result-left div{display:flex;justify-content:space-between;padding:6px 0;color:#7a7a41}
+.result-body{text-align:center;padding:12px}
+.result-body .big{font-size:28px;color:#2a807f;margin:8px 0}
+
+@media (max-width:600px){
+  .calculator-card{padding:16px}
+}

@@ -50,8 +50,15 @@
 
     <link
         rel="stylesheet"
+        href="../styles/loan.css"
+    >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+    <link
+        rel="stylesheet"
         href="../components/navbar/navbar.css"
     >
+    <link rel="stylesheet" href="../styles/footer.css">
 
 </head>
 
@@ -72,9 +79,75 @@
                 محاسبه اقساط وام
             </h1>
 
-            <p>
-                صفحه محاسبه وام در این قسمت ساخته خواهد شد.
-            </p>
+            <section class="calculator-card">
+                <div class="calc-row">
+                    <label>نوع محاسبه</label>
+                    <select id="calc-type">
+                        <option value="rate" selected>محاسبه درصد سود وام</option>
+                        <option value="annuity">محاسبه مبلغ قسط وام</option>
+                    </select>
+                </div>
+
+                <div class="calc-row">
+                    <label>مبلغ وام (تومان)</label>
+                    <input id="loan-amount" placeholder="مثال: 20,000,000">
+                </div>
+
+                <div class="calc-row" id="annual-rate-row">
+                    <label>درصد سود سالانه (%)</label>
+                    <input id="annual-rate" placeholder="مثال: 18">
+                </div>
+
+                <div class="calc-row" id="payment-row" style="display:none">
+                    <label>مبلغ قسط (تومان)</label>
+                    <input id="payment-amount" placeholder="مثال: 100,000">
+                </div>
+
+                <div class="calc-row two-cols">
+                    <div>
+                        <label>تعداد اقساط</label>
+                        <input id="installments" placeholder="مثال: 48">
+                    </div>
+                    <div>
+                        <label>فاصله بین اقساط</label>
+                        <select id="interval">
+                            <option value="month">یک ماه</option>
+                            <option value="quarter">یک فصل</option>
+                            <option value="year">یک سال</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="calc-actions">
+                    <button id="calculate" class="btn-primary">محاسبه</button>
+                </div>
+            </section>
+
+            <!-- نتیجه در مودال -->
+            <div id="result-modal" class="result-modal" aria-hidden="true">
+                <div class="result-card">
+                    <button id="close-result" class="close-btn">×</button>
+                    <div class="result-top">
+                        <div class="result-left">
+                            <div><strong>اصل وام</strong><span id="out-principal"></span></div>
+                            <div><strong>نرخ سود سالانه</strong><span id="out-rate"></span></div>
+                            <div><strong>تعداد اقساط</strong><span id="out-n"></span></div>
+                            <div><strong>فاصله اقساط</strong><span id="out-interval"></span></div>
+                        </div>
+                    </div>
+
+                    <div class="result-body">
+                        <h4>مبلغ هر قسط</h4>
+                        <div class="big" id="out-payment"></div>
+
+                        <h4>جمع کل اقساط</h4>
+                        <div class="big" id="out-total"></div>
+
+                        <h4>سود کل وام</h4>
+                        <div class="big" id="out-interest"></div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -84,6 +157,42 @@
     <script
         src="../components/navbar/navbar.js"
     ></script>
+    <script src="../js/loan.js" defer></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.getElementById('math-explanation'),{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="col project-links">
+            <h4>پروژه</h4>
+            <ul>
+                <li><a href="https://github.com/SE-LAB-14043/AZ1-repo" target="_blank">ریپو گیت‌هاب</a></li>
+                <li><a href="https://github.com/orgs/SE-LAB-14043/projects/1" target="_blank">کانبان بورد پروژه</a></li>
+            </ul>
+        </div>
+
+        <div class="col site-links">
+            <h4>صفحات سایت</h4>
+            <ul>
+                <li><a href="../index.html">خانه</a></li>
+                <li><a href="profit.html">محاسبه سود</a></li>
+                <li><a href="loan.html">محاسبه وام</a></li>
+                <li><a href="about.html">درباره ما</a></li>
+            </ul>
+        </div>
+
+        <div class="col univ-links">
+            <h4>لینک‌های مفید</h4>
+            <ul>
+                <li><a href="https://sharif.edu" target="_blank">دانشگاه صنعتی شریف</a></li>
+                <li><a href="https://cee.sharif.edu" target="_blank">دانشکده مهندسی کامپیوتر</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="bottom">تمامی حقوق برای پروژه محفوظ است — SE-LAB-14043 © 1403</div>
+</footer>
 
 </body>
 
