@@ -82,6 +82,7 @@
                 <div class="calc-row">
                     <label>نوع محاسبه</label>
                     <select id="calc-type">
+                        <option value="rate" selected>محاسبه درصد سود وام</option>
                         <option value="annuity">محاسبه مبلغ قسط وام</option>
                     </select>
                 </div>
@@ -91,9 +92,14 @@
                     <input id="loan-amount" placeholder="مثال: 20,000,000">
                 </div>
 
-                <div class="calc-row">
+                <div class="calc-row" id="annual-rate-row">
                     <label>درصد سود سالانه (%)</label>
                     <input id="annual-rate" placeholder="مثال: 18">
+                </div>
+
+                <div class="calc-row" id="payment-row" style="display:none">
+                    <label>مبلغ قسط (تومان)</label>
+                    <input id="payment-amount" placeholder="مثال: 100,000">
                 </div>
 
                 <div class="calc-row two-cols">

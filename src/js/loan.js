@@ -22,6 +22,44 @@
     });
   }
 
+  function formatPercent(p){
+    if(typeof p !== 'number') p = Number(p)||0;
+    return p.toLocaleString('en-US', {maximumFractionDigits:3});
+  }
+
+  // solve periodic rate r given P, payment, n using bisection
+  function solvePeriodicRate(P, payment, n){
+    if(n<=0) return 0;
+    // if payment equals zero or less, return 0
+    if(payment <= 0) return 0;
+    // if payment equals P/n then rate is ~0
+    var eps = 1e-12;
+    var f = function(r){
+      if(r === 0) return P/n - payment;
+      return P * r / (1 - Math.pow(1 + r, -n)) - payment;
+    };
+    var low = 0, high = 1;
+    // expand high until sign change
+    var maxExpand = 50;
+    var fl = f(low), fh = f(high);
+    var iter=0;
+    while(fl*fh > 0 && iter < maxExpand){
+      high *= 2; fh = f(high); iter++;
+      if(high>1e6) break;
+    }
+    // if still same sign, fallback to 0
+    if(fl * fh > 0) return 0;
+    var mid;
+    for(var i=0;i<100;i++){
+      mid = (low+high)/2;
+      var fm = f(mid);
+      if(Math.abs(fm) < eps) break;
+      if(fl * fm <= 0){ high = mid; fh = fm; }
+      else { low = mid; fl = fm; }
+    }
+    return mid;
+  }
+
   function periodsPerYear(interval){
     switch(interval){
       case 'month': return 12;
@@ -59,24 +97,53 @@
     // attach formatting for amount and installments
     attachInputFormatting('loan-amount');
     attachInputFormatting('installments');
+    attachInputFormatting('payment-amount');
+
+    var calcType = $('calc-type');
+    var annualRow = $('annual-rate-row');
+    var paymentRow = $('payment-row');
+    function updateMode(){
+      var mode = calcType.value;
+      if(mode === 'annuity'){
+        annualRow.style.display = '';
+        paymentRow.style.display = 'none';
+      } else {
+        annualRow.style.display = 'none';
+        paymentRow.style.display = '';
+      }
+    }
+    if(calcType) calcType.addEventListener('change', updateMode);
+    updateMode();
 
     var btn = $('calculate');
     if(!btn) return;
     btn.addEventListener('click', function(e){
       e.preventDefault();
+      var mode = $('calc-type').value;
       var P = parseNumber($('loan-amount').value);
-      var annualRate = parseFloat($('annual-rate').value) || 0;
       var n = parseInt(parseNumber($('installments').value)) || 0;
       var interval = $('interval').value;
       var k = periodsPerYear(interval);
 
-      var payment = annuityPayment(P, annualRate, n, k);
-      var total = payment * n;
-      var interest = total - P;
+      var payment = 0, annualRate = 0, total = 0, interest = 0;
+      if(mode === 'annuity'){
+        annualRate = parseFloat($('annual-rate').value) || 0;
+        payment = annuityPayment(P, annualRate, n, k);
+      } else {
+        payment = parseNumber($('payment-amount').value);
+        // solve for periodic rate r, then annualRate = r * k * 100
+        var r = solvePeriodicRate(P, payment, n);
+        annualRate = r * k * 100;
+      }
+      total = payment * n;
+      interest = total - P;
 
       var intervalLabel = ({month:'ماه',quarter:'فصل',year:'سال'})[interval] || 'دوره';
 
-      showResult({P,annualRate,n,intervalLabel,payment,total,interest});
+      // format annualRate nicely
+      var displayRate = formatPercent(annualRate);
+
+      showResult({P,annualRate:displayRate,n,intervalLabel,payment,total,interest});
     });
 
     $('close-result').addEventListener('click', function(){ hideResult() });
