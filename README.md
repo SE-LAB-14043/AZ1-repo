@@ -9,10 +9,7 @@
 ---
 
 ## ساختار پروژه (خلاصه)
-
-- `src/` : کدهای HTML/CSS/JS صفحات
-  - `pages/` : صفحات جداگانه (`index.html`, `profit.html`, `loan.html`, `about.html`)
-  - `styles/` : فایل‌های CSS (global, responsive, footer, profit, loan, about)
+S (global, responsive, footer, profit, loan, about)
   - `components/navbar/` : ناوبار کامپوننت
   - `js/` : منطق جاوااسکریپت مربوط به صفحات (`loan.js`, `profit.js`)
 
